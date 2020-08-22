@@ -1,8 +1,8 @@
 node {
   checkout scm
     docker.withRegistry('https://hub.docker.com/repository/docker/venkatsep16/dockerfirsttest', 'venkatsep16') {
-      def customImage = docker.build("miltonc/dockerwebapp")
+    def customImage = docker.build("miltonc/dockerwebapp")
         /* Push the container to the custom Registry https://hub.docker.com/repository/docker/venkatsep16/dockerfirsttest*/
-        customImage.push()
+    customImage.push()
     }
 }
