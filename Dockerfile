@@ -1,8 +1,19 @@
-FROM tomcat8.0-alpine:v1
-Maintainer Venkat
-RUN apk add --no-cache wget curl shadow tar gzip unzip bash procps iputils busybox-extras xz vim
-RUN apk add --no-cache libstdc++ &&  apk add --no-cache libgcc
-WORKDIR /usr/local/tomcat/webapps
-EXPOSE 9080
-RUN sed -i 's/port="9080"/port="8000"/' /usr/local/tomcat/conf/server.xml
-CMD ["/usr/local/tomcat/bin/catalina.sh", "run"]
+FROM node:8
+
+# Create app directory
+WORKDIR /usr/src/app
+
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY package*.json ./
+
+RUN npm install
+# If you are building your code for production
+# RUN npm install --only=production
+
+# Bundle app source
+COPY . .
+
+EXPOSE 8080
+CMD [ "npm", "start" ]
