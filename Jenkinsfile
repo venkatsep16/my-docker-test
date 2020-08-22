@@ -1,20 +1,29 @@
 pipeline {
-    agent { any }
+    agent any
     stages {
-        stage('Test') {
+        stage('Build image') {
             steps {
-                sh 'node --version'
-                sh 'svn --version'
+                echo 'Starting to build docker image'
+
+                script {
+                    def customImage = docker.build("testImage:${env.BUILD_ID}")
+                    customImage.push()
+                }
             }
         }
     }
 }
 
-/* node {
+
+
+
+
+
+/*node {
   stage('SCM Checkout'){
     docker.withRegistry('https://hub.docker.com/repository/docker/venkatsep16/dockerfirsttest', 'venkatsep16')
     def customImage = docker.build("miltonc/dockerwebapp")
          Push the container to the custom Registry https://hub.docker.com/repository/docker/venkatsep16/dockerfirsttest
     customImage.push()
     }
-} */
+}*/
