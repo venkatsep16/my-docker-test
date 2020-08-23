@@ -1,4 +1,4 @@
-FROM tomcat8.0-alpine:v1
+FROM tomcat8.0
 Maintainer Venkat
 RUN apk add --no-cache wget curl shadow tar gzip unzip bash procps iputils busybox-extras xz vim
 RUN apk add --no-cache libstdc++ &&  apk add --no-cache libgcc
