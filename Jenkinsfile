@@ -1,4 +1,19 @@
 pipeline {
+    agent { dockerfile true }
+    stages {
+        stage('Test') {
+            steps {
+                sh 'node --version'
+                sh 'svn --version'
+            }
+        }
+    }
+}
+
+
+
+
+/*pipeline {
   agent none
   stages {
     stage('Maven Install') {
@@ -22,7 +37,7 @@ pipeline {
 
 
 
-/*pipeline {
+pipeline {
     agent any
     stages {
         stage('SCM Checkout'){
